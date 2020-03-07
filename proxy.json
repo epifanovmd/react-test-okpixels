@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "http://www.mocky.io/v2",
+    "pathRewrite": {"^/api": "/5e637b953600006500e8dd23"},
+    "changeOrigin": true
+  }
+}
