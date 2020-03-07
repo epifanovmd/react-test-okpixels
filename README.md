@@ -1,4 +1,4 @@
-Test OKPixels
+Test OKPixels (на выполнение ушло примерно 2-3 часа)
 
 ##### Stack:
 
