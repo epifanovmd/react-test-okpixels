@@ -19,24 +19,16 @@ const FilterWrap = styled.div`
 const FilterItem = styled.div`
   padding-right: 25px;
 `;
-export const VacancyFilter: FC<IProps> = memo(({ onSetFilter, filter }) => {
+export const VacancyFilter: FC<IProps> = memo(({ onSetFilter }) => {
+  const onChange = useCallback((_values: IVacancyFilter) => onSetFilter(_values), []);
   const { values, handleBlur, handleChange } = useForm<IVacancyFilter>({
     initialValues: {
       numVacancy: "",
       name: "",
     },
-    data: filter,
+    // data: filter,
+    onChange,
   });
-
-  const onInputEnter = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      console.log(event.keyCode);
-      if (event.keyCode === 13) {
-        onSetFilter(values);
-      }
-    },
-    [onSetFilter, values],
-  );
 
   return (
     <FilterWrap>
@@ -47,7 +39,6 @@ export const VacancyFilter: FC<IProps> = memo(({ onSetFilter, filter }) => {
           value={values.numVacancy}
           onChange={handleChange}
           onBlur={handleBlur}
-          onKeyDown={onInputEnter}
         />
       </FilterItem>
       <FilterItem>
@@ -57,7 +48,6 @@ export const VacancyFilter: FC<IProps> = memo(({ onSetFilter, filter }) => {
           value={values.name}
           onChange={handleChange}
           onBlur={handleBlur}
-          onKeyDown={onInputEnter}
         />
       </FilterItem>
     </FilterWrap>

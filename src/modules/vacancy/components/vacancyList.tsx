@@ -16,6 +16,8 @@ interface IProps {
   list: IVacancy[];
 }
 
+const findPartial = (text: string, search: string) => text.indexOf(search) >= 0;
+
 export const VacancyList: FC<IProps> = memo(({ list }) => {
   const [filter, onSetFilter] = useState<IVacancyFilter>({
     name: "",
@@ -25,11 +27,15 @@ export const VacancyList: FC<IProps> = memo(({ list }) => {
   const filterList: IVacancy[] = useMemo(
     () =>
       filterArray(list, [
-        { key: "name", value: filter.name, compare: (a, b) => a === b },
+        {
+          key: "name",
+          value: filter.name,
+          compare: (a, b) => findPartial(`${a}`, `${b}`),
+        },
         {
           key: "numVacancy",
           value: +filter.numVacancy,
-          compare: (a, b) => a === b,
+          compare: (a, b) => findPartial(`${a}`, `${b}`),
         },
       ]),
     [filter, list],
